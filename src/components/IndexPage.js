@@ -64,6 +64,18 @@ class IndexPage extends Component {
   }
   render() {
     const { moviesList, totalPages, currentPage } = this.props;
+    let pagination;
+    if (totalPages > 1) {
+      pagination = (
+        <Pagination
+          total = { totalPages }
+          current = {currentPage}
+          display = {10}
+          styleRoot = { paginationWrapStyle }
+          onChange = { this.handlerPagination }
+        />
+      )
+    }
     return (
       <div>
         <header className='page-header'>
@@ -72,14 +84,8 @@ class IndexPage extends Component {
         </header>
         <main className='page-main'>
           <MoviesList  { ...{ moviesList } }/>
+          {pagination}
         </main>
-        <Pagination
-          total = { totalPages }
-          current = {currentPage}
-          display = {10}
-          styleRoot = { paginationWrapStyle }
-          onChange = { this.handlerPagination }
-        />
       </div>
     )
   }
