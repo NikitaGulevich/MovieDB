@@ -40,9 +40,11 @@ class IndexPage extends Component {
       .then(response => {
         response.json()
           .then(response => {
-            const { getMoviesList, getTotalPages } = this.props;
+            const { getMoviesList, getTotalPages, totalPages } = this.props;
             getMoviesList(response.results);
-            getTotalPages(response.total_pages);
+            if (totalPages !== response.total_pages) {
+              getTotalPages(response.total_pages);
+            }
           })
       })
   }
